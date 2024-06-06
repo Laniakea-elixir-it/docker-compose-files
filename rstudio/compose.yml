@@ -1,0 +1,23 @@
+services:
+  rstudio:
+    image: rocker/rstudio:4.0.3
+    container_name: rstudio
+    restart: on-failure
+    volumes:
+      - type: volume
+        source: rstudio
+        target: /home/rstudio
+      - type: bind
+        source: ./projects
+        target: /home/rstudio/projects
+      - type: volume
+        source: r_libs
+        target: /usr/local/lib/R
+    environment:
+      - PASSWORD=rstudio1
+    ports:
+      - 80:8787
+
+volumes:
+  r_libs:
+  rstudio:
